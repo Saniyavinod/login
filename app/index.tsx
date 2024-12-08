@@ -63,9 +63,9 @@ const Index = () => {
                                         
                                         <MaskedView maskElement={<Text style={{ color: "white", fontSize: 48, fontWeight: 600,fontFamily:"Inter_600SemiBold" }}>Coming Soon!</Text>}>
                                         <LinearGradient
-                                                // Button Linear Gradient
+                                                
                                                 colors={['#ffffff', '#878787']}
-                                                start={{ x: 0, y: 0 }}  // Start from the left
+                                                start={{ x: 0, y: 0 }}  
                                                 end={{ x: 1, y: 0 }}>
                                                     <Text style={{ opacity:0,color: "white", fontSize: 48, fontWeight: 600,fontFamily:"Inter_600SemiBold" }}>Coming Soon!</Text>
                                                 </LinearGradient>
@@ -130,17 +130,17 @@ const Index = () => {
                                         </View>
                                         <View style={{ width: "100%" }}>
                                             <LinearGradient
-                                                // Button Linear Gradient
+                                                
                                                 colors={['#ef3288', '#1355d9', '#87cefa']}
-                                                start={{ x: 0, y: 0 }}  // Start from the left
+                                                start={{ x: 0, y: 0 }} 
                                                 end={{ x: 1, y: 0 }}
                                                 style={{
                                                     borderRadius: 10,
                                                     borderWidth: 0.3,
                                                     borderColor: "white",
                                                     display: "flex",
-                                                    justifyContent: "center",  // Center content vertically
-                                                    alignItems: "center",      // Center content horizontally
+                                                    justifyContent: "center", 
+                                                    alignItems: "center",      
                                                 }}
                                             >
                                                 <TouchableOpacity
@@ -150,8 +150,8 @@ const Index = () => {
                                                         borderRadius: 10,
                                                         display: "flex",
                                                         flexDirection: "row",
-                                                        justifyContent: "center",  // Center content horizontally
-                                                        alignItems: "center",      // Center content vertically
+                                                        justifyContent: "center",  
+                                                        alignItems: "center",      
                                                     }}
                                                 >
                                                     <Text style={{ color: "white", fontWeight: "500", fontSize: 14,fontFamily:"Inter_600SemiBold" }}>
@@ -159,7 +159,7 @@ const Index = () => {
                                                     </Text>
                                                     <Image
                                                         source={require('../assets/images/Vector.png')}
-                                                        style={{ marginLeft: 8 }}  // Add some space between the text and image
+                                                        style={{ marginLeft: 8 }} 
                                                     />
                                                 </TouchableOpacity>
                                             </LinearGradient>
@@ -184,7 +184,7 @@ const Index = () => {
 
 const styles = StyleSheet.create({
     background: {
-        flex: 1, // Ensure the background takes the entire screen // Center content horizontally
+        flex: 1, 
         zIndex: -1,
     },
     text: {
