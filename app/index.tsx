@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Image, useWindowDimensions } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import MaskedView from "@react-native-masked-view/masked-view";
+import { StatusBar } from 'expo-status-bar';
+import {styles} from './styles'
+
 import {
     useFonts,
     Inter_100Thin,
@@ -17,9 +20,7 @@ import {
     Inter_900Black,
 } from '@expo-google-fonts/inter';
 
-
 const Index = () => {
-
     let [fontsLoaded] = useFonts({
         Inter_100Thin,
         Inter_200ExtraLight,
@@ -32,134 +33,132 @@ const Index = () => {
         Inter_900Black,
     });
 
+    const windowHeight = useWindowDimensions().height;
+
     if (!fontsLoaded) {
-        return <View><Text>Loading....</Text></View>;
+        return (
+            <View>
+                <Text>Loading....</Text>
+            </View>
+        );
     } else {
         return (
             <>
-                <SafeAreaView style={{ flex: 1 }}>
+                <SafeAreaView style={styles.safeArea}>
                     <ImageBackground
                         source={require('../assets/images/Background.jpg')}
                         style={styles.background}
                     >
-                        {/* Add any content you want inside the background */}
-                        <View style={{ flex: 1, display: "flex", justifyContent: "space-between" }}>
-                            <View style={{ backgroundColor: "black", zIndex: 1, height: "25%", paddingTop: 80, paddingHorizontal: 20 }}>
-                                <View style={{ flex: 1, display: "flex", gap: 10, alignItems: "center", width: "100%", backgroundColor: "", justifyContent: "center" }}>
-                                    <View style={{ display: "flex" }}>
-                                        
-                                        <View style={{ display: "flex", flexDirection: "row" }}>
-                                            <Image source={require('../assets/images/line 12.png')} style={{ zIndex: 10, height: 20 }} />
-                                            <MaskedView maskElement={<Text style={{ color: "white", fontSize: 16,fontFamily:"Inter_400Regular" }}>HScore</Text>}>
-                                            <LinearGradient
-                                                // Button Linear Gradient
-                                                colors={['#ffffff', '#878787']}
-                                                start={{ x: 0, y: 0 }}  // Start from the left
-                                                end={{ x: 1, y: 0 }}><Text style={{opacity:0,color: "white", fontSize: 16,fontFamily:"Inter_400Regular" }}>HScore</Text>
+                        <StatusBar style="light" backgroundColor="black" />
+                        <View style={styles.mainContainer}>
+                            {/* Header Section */}
+                            <View style={[
+                                styles.headerContainer,
+                                {
+                                    height: windowHeight > 768 ? windowHeight * 0.25 : windowHeight * 0.35,
+                                },
+                            ]}>
+                                <View style={styles.headerContent}>
+                                    <View>
+                                        <View style={styles.logoContainer}>
+                                            <Image
+                                                source={require('../assets/images/line 12.png')}
+                                                style={styles.logoLine}
+                                            />
+                                            <MaskedView
+                                                maskElement={
+                                                    <Text style={styles.hscoreText}>HScore</Text>
+                                                }
+                                            >
+                                                <LinearGradient
+                                                    colors={['#ffffff', '#878787']}
+                                                    start={{ x: 0, y: 0 }}
+                                                    end={{ x: 1, y: 0 }}
+                                                >
+                                                    <Text style={[styles.hscoreText, { opacity: 0 }]}>HScore</Text>
                                                 </LinearGradient>
-                                                </MaskedView>
-                                            <Image source={require('../assets/images/line 12.png')} style={{ zIndex: 10, height: 20 }} />
+                                            </MaskedView>
+                                            <Image
+                                                source={require('../assets/images/line 12.png')}
+                                                style={styles.logoLine}
+                                            />
                                         </View>
-                                        
-                                        <MaskedView maskElement={<Text style={{ color: "white", fontSize: 48, fontWeight: 600,fontFamily:"Inter_600SemiBold" }}>Coming Soon!</Text>}>
-                                        <LinearGradient
-                                                
+                                        <MaskedView
+                                            maskElement={
+                                                <Text style={styles.comingSoonText}>Coming Soon!</Text>
+                                            }
+                                        >
+                                            <LinearGradient
                                                 colors={['#ffffff', '#878787']}
-                                                start={{ x: 0, y: 0 }}  
-                                                end={{ x: 1, y: 0 }}>
-                                                    <Text style={{ opacity:0,color: "white", fontSize: 48, fontWeight: 600,fontFamily:"Inter_600SemiBold" }}>Coming Soon!</Text>
-                                                </LinearGradient>
-                                                </MaskedView>
+                                                start={{ x: 0, y: 0 }}
+                                                end={{ x: 1, y: 0 }}
+                                            >
+                                                <Text
+                                                    style={[
+                                                        styles.comingSoonText,
+                                                        { opacity: 0 },
+                                                    ]}
+                                                >
+                                                    Coming Soon!
+                                                </Text>
+                                            </LinearGradient>
+                                        </MaskedView>
                                     </View>
-                                    <Text style={{ lineHeight:24,color: "gray", textAlign: "center", fontSize: 16,fontFamily:"Inter_400Regular" }}>Lorem ipsum dolor sit amet consectetur. Et purus volutpat nunc tristique a. Sit accumsan et lorem tortor massa turpis.
-                                        A elit leo duis massa mattis amet.</Text>
+                                    <Text style={styles.descriptionText}>
+                                        Lorem ipsum dolor sit amet consectetur. Et purus volutpat nunc tristique a. Sit accumsan et lorem tortor massa turpis. A elit leo duis massa mattis amet.
+                                    </Text>
                                 </View>
                             </View>
 
-                            <View style={{ zIndex: 1, paddingHorizontal: 20 }}>
-                                <BlurView intensity={30} tint="systemThickMaterialLight" style={{ borderWidth: .5, borderColor: "white", borderRadius: 10 }}>
-                                    <GestureHandlerRootView style={{ display: "flex", alignItems: "center", backgroundColor: '', borderWidth: 4, paddingVertical: 20, paddingHorizontal: 20, gap: 20, borderRadius: 10, borderColor: "white" }}>
+                            {/* Form Section */}
+                            <View style={styles.formContainer}>
+                                <BlurView intensity={30} tint="systemThickMaterialLight" style={styles.blurView}>
+                                    <GestureHandlerRootView style={styles.gestureView}>
                                         <View>
-                                            <Text style={{ textAlign: "center", fontSize: 24, color: "white", fontWeight: 600,fontFamily:"Inter_600SemiBold" }}>Join our waitlist</Text>
-                                            <Text style={{ fontSize: 16, color: "white",fontFamily:"Inter_300Light" }}>Lorem ipsum dolor sit consectetur. </Text>
+                                            <Text style={styles.waitlistTitle}>Join our waitlist</Text>
+                                            <Text style={styles.waitlistSubtitle}>
+                                                Lorem ipsum dolor sit consectetur.
+                                            </Text>
                                         </View>
-                                        <View style={{ width: "100%" }}>
+                                        <View style={styles.inputContainer}>
                                             <BlurView intensity={30}>
-                                                <TextInput placeholder='Full Name' placeholderTextColor="white" style={{
-                                                    backgroundColor: "",
-                                                    padding: 20,
-                                                    borderWidth: .5,
-                                                    borderColor: "white",
-                                                    borderRadius: 10,
-                                                    height: 60,
-                                                    color: "white",
-                                                    fontSize: 16,
-                                                    fontFamily:"Inter_400Regular"
-                                                }}></TextInput>
-                                            </BlurView>
-
-                                        </View>
-                                        <View style={{ width: "100%" }}>
-                                            <BlurView intensity={30}>
-                                                <TextInput placeholder='Mobile Number' placeholderTextColor="white" style={{
-                                                    backgroundColor: "",
-                                                    padding: 20,
-                                                    borderWidth: .5,
-                                                    borderColor: "white",
-                                                    borderRadius: 10,
-                                                    height: 60,
-                                                    fontSize: 16,
-                                                    fontFamily:"Inter_400Regular"
-                                                }}></TextInput>
-                                            </BlurView>
-
-                                        </View>
-                                        <View style={{ width: "100%" }}>
-                                            <BlurView intensity={30}>
-                                                <TextInput placeholder='Email' placeholderTextColor="white" style={{
-                                                    backgroundColor: "",
-                                                    padding: 20,
-                                                    borderWidth: .5,
-                                                    borderColor: "white",
-                                                    borderRadius: 10,
-                                                    height: 60,
-                                                    fontSize: 16,
-                                                    fontFamily:"Inter_400Regular"
-                                                }}></TextInput>
+                                                <TextInput
+                                                    placeholder="Full Name"
+                                                    placeholderTextColor="white"
+                                                    style={styles.input}
+                                                />
                                             </BlurView>
                                         </View>
-                                        <View style={{ width: "100%" }}>
+                                        <View style={styles.inputContainer}>
+                                            <BlurView intensity={30}>
+                                                <TextInput
+                                                    placeholder="Mobile Number"
+                                                    placeholderTextColor="white"
+                                                    style={styles.input}
+                                                />
+                                            </BlurView>
+                                        </View>
+                                        <View style={styles.inputContainer}>
+                                            <BlurView intensity={30}>
+                                                <TextInput
+                                                    placeholder="Email"
+                                                    placeholderTextColor="white"
+                                                    style={styles.input}
+                                                />
+                                            </BlurView>
+                                        </View>
+                                        <View style={styles.buttonContainer}>
                                             <LinearGradient
-                                                
                                                 colors={['#ef3288', '#1355d9', '#87cefa']}
-                                                start={{ x: 0, y: 0 }} 
+                                                start={{ x: 0, y: 0 }}
                                                 end={{ x: 1, y: 0 }}
-                                                style={{
-                                                    borderRadius: 10,
-                                                    borderWidth: 0.3,
-                                                    borderColor: "white",
-                                                    display: "flex",
-                                                    justifyContent: "center", 
-                                                    alignItems: "center",      
-                                                }}
+                                                style={styles.buttonGradient}
                                             >
-                                                <TouchableOpacity
-                                                    style={{
-                                                        paddingVertical: 18,
-                                                        width: "100%",
-                                                        borderRadius: 10,
-                                                        display: "flex",
-                                                        flexDirection: "row",
-                                                        justifyContent: "center",  
-                                                        alignItems: "center",      
-                                                    }}
-                                                >
-                                                    <Text style={{ color: "white", fontWeight: "500", fontSize: 14,fontFamily:"Inter_600SemiBold" }}>
-                                                        Join Now
-                                                    </Text>
+                                                <TouchableOpacity style={styles.button}>
+                                                    <Text style={styles.buttonText}>Join Now</Text>
                                                     <Image
                                                         source={require('../assets/images/Vector.png')}
-                                                        style={{ marginLeft: 8 }} 
+                                                        style={styles.buttonIcon}
                                                     />
                                                 </TouchableOpacity>
                                             </LinearGradient>
@@ -168,33 +167,17 @@ const Index = () => {
                                 </BlurView>
                             </View>
 
-                            <View style={{ display: "flex", alignItems: "center", paddingBottom: 20 }}>
-                                <Text style={{ color: "white",fontFamily:"Inter_400Regular" }}>© 2024 HScore. All rights reserved.</Text>
+                            {/* Footer */}
+                            <View style={styles.footerContainer}>
+                                <Text style={styles.footerText}>© 2024 HScore. All rights reserved.</Text>
                             </View>
-
                         </View>
-
                     </ImageBackground>
                 </SafeAreaView>
             </>
         );
     }
-
 };
 
-const styles = StyleSheet.create({
-    background: {
-        flex: 1, 
-        zIndex: -1,
-    },
-    text: {
-        color: 'white',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    container: {
-        backgroundColor: "black"
-    }
-});
 
-export default Index
+export default Index;
